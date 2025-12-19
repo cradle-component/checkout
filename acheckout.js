@@ -1,4 +1,3 @@
-<script>
 /* acheckout.js
  * CradleCMS Checkout helper component
  * version 1.0.1
@@ -50,4 +49,3 @@ class Checkout extends HTMLElement {
     }
 }
 customElements.define('a-checkout', Checkout);
-</script>
