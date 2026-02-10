@@ -17,7 +17,7 @@ You must include the `cart.id` either in a form attribute or as a hidden input v
 {% component 'acheckout.js' %}
 ```
 
-## Using hidden input value
+### Using hidden input value
 ```
 {% form 'checkout' %}
 <input type="hidden" name="cart" value="{{cart.id}}">
