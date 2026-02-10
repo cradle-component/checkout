@@ -21,14 +21,25 @@ checkoutCSS.replaceSync(`
 `)
 
 class Checkout extends HTMLElement {
+    #cart
     connectedCallback() {
         document.adoptedStyleSheets = [checkoutCSS];
         const checkoutForm = document.getElementById("checkout-form");
+        // get cartId from <form data-cart="cartId>"> or 
+        // <input type="hidden" name="cart" value="cartId">
+        this.#cart = checkoutForm.getAttribute("data-cart");
+        if(!this.#cart) {
+            let ci = checkoutForm.querySelector('input[name="cart"]');
+            if(ci) {
+                this.#cart = ci.value;
+            }
+            if(!this.#cart) return;
+        }        
         checkoutForm.addEventListener('change', function(e) {
             let el = e.target;
-            if(el.name == "country" || el.name == "shipping" || el.name == "gateway") {
+            if(el.name == "country" || el.name == "shipping" || el.name == "gateway") { 
                 const formData = new FormData(checkoutForm);
-                fetch("/checkout/{{cart.id}}", {
+                fetch(`/checkout/${this.#cart}`, {
                     method: "PUT",
                     body: JSON.stringify(Object.fromEntries(formData)),
                     credentials: "include",
