@@ -1,6 +1,6 @@
 /* acheckout.js
  * CradleCMS Checkout helper component
- * version 1.0.1
+ * version 1.0.2
  */
 const checkoutCSS = new CSSStyleSheet()
 checkoutCSS.replaceSync(`
